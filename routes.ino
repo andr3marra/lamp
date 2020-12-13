@@ -34,8 +34,8 @@ void setRoutes() {
   server.on("/color/custom", HTTP_POST, []() {  // Custom color
     String data;
     data = server.arg(0);
-    for ( uint8_t i = 0; i < NUM_LEDS; i++) {
-      leds[(i)].setRGB( (byte) data.charAt(i), (byte) data.charAt(i + 1), (byte) data.charAt(i + 2));
+    for ( int i = 0; i < 3*NUM_LEDS; i = i + 3) {
+      leds[(i/3)].setRGB( (uint8_t) data[i], (uint8_t) data[i+1], (uint8_t) data[i+2]);
     }
     FastLED.show();
     server.send(200);
@@ -53,7 +53,7 @@ void setRoutes() {
 
   server.on("/status", []() {                 // turn on and off, and get current mode
     //server.send(200, "text/plain", animationChar);
-    //server.send(200, "text/plain", (String) brightness);
+    server.send(200, "text/plain", (String) brightness);
   });
 
   server.on("/connect", []() {                 // conenct to wifi

@@ -29,8 +29,8 @@ char animationChar;
 char lastAnimationChar;
 char modeChar;
 uint8_t brightness = 255;           // EEPROM
-String ssid = "Ap 142";//              32bytes
-String password  = "ap1422020";    //              63bytes
+String ssid = "CASE";//              32bytes
+String password  = "gargantua97";    //              63bytes
 int r[90], g[90], b[90];
 
 /////////////////////////////////////////// NODE MCU
@@ -53,9 +53,10 @@ void WiFiconfig(char wifiMode) {
       delay(500);
       Serial.print(".");
     }
-    if (MDNS.begin("esp8266")) {
+    if (MDNS.begin("ledlamp")) {
       Serial.println("MDNS responder started");
     }
+    WiFi.hostname("NODE-MCU-01");
   }
   setRoutes();
   server.begin();
